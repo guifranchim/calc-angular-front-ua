@@ -3,7 +3,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
-import { AuthService } from '../../core/auth.service';
 import { CalculadoraService, Operacao } from '../../core/calculadora.service';
 
 interface Calculo { expressao: string; resultado: string; }
@@ -16,7 +15,6 @@ interface Calculo { expressao: string; resultado: string; }
 })
 export class Calculadora {
   private readonly api = inject(CalculadoraService);
-  private readonly auth = inject(AuthService);
   private readonly router = inject(Router);
   private readonly destroyRef = inject(DestroyRef);
   readonly carregando = signal(false);
@@ -66,7 +64,6 @@ export class Calculadora {
       error: (failure: unknown) => {
         const status = (failure as { status?: number }).status;
         if (status === 401) {
-          this.auth.logout();
           void this.router.navigate(['/login'], { queryParams: { expirada: true } });
         } else if (status === 403) this.erro.set('Acesso negado. Confira as permissões ou entre novamente.');
         else if (status === 0) this.erro.set('Não foi possível acessar a API. Confira o servidor e o CORS.');
@@ -76,7 +73,6 @@ export class Calculadora {
   }
 
   sair(): void {
-    this.auth.logout();
     void this.router.navigate(['/login']);
   }
 }

@@ -9,7 +9,7 @@ npm install
 npm start
 ```
 
-Acesse http://localhost:4200. Credenciais demonstrativas `admin` e `AulaJwt123!`.
+Acesse http://localhost:4200. Preencha os campos para explorar as telas. O botão Entrar abre a calculadora local.
 
 
 ## Verificar
