@@ -2,6 +2,8 @@ import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
+import { AuthService } from '../../core/auth.service';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -20,6 +22,7 @@ export class Login {
     senha: ['', Validators.required],
   });
 
+  private readonly auth = inject(AuthService);
 
   entrar(): void {
     if (this.form.invalid || this.carregando()) {
@@ -27,7 +30,23 @@ export class Login {
       return;
     }
 
-    // Na aula, substituir pela chamada ao AuthService.
-    void this.router.navigate(['/calculadora']);
+    this.erro.set('');
+    this.carregando.set(true);
+    const { login, senha } = this.form.getRawValue();
+    this.auth.login(login, senha).pipe(
+      finalize( () =>  this.carregando.set(false))
+    ).subscribe({
+      next: () => {
+        this.form.controls.senha.reset();
+        void this.router.navigate(['/calculadora'])
+      },
+      error: (failure: unknown ) => {
+        const status = (failure as { status?: number }).status;
+        if (status === 0) this.erro.set("Nao foi possivel acessar a API");
+        else if (status === 401 || status === 403) this.erro.set("Login recusado")
+        else this.erro.set("Nao foi possivel entrar. Tente novamente")
+      }
+    })
+
   }
 }
