@@ -1,17 +1,23 @@
-# Calcula — frontend para aula de JWT
+# Laboratório Angular + JWT
 
-Frontend em HTML, CSS e JavaScript com Vite. Login, quatro operações, resultado, histórico e estados de erro prontos para integrar ao Spring.
+Frontend preparado para uma aula de integração com Spring Security. Angular 21, estrutura do Angular CLI, componentes standalone, rotas, Reactive Forms, signals e serviços injetáveis.
 
-```sh
+## Executar
+
+```bash
 npm install
-npm run dev
+npm start
 ```
 
-Abra http://localhost:4200. No modo demonstrativo use `admin` / `AulaJwt123!`.
+Acesse http://localhost:4200. Credenciais demonstrativas `admin` e `AulaJwt123!`.
 
 
-```sh
+## Verificar
+
+```bash
 npm run build
 ```
 
-Requisito de execução do Vite 7, Node.js 20.19+ ou 22.12+. Testado com Node 24. O frontend usa fontes do Google Fonts com fallback local.
+Validado com Node 24.12.0. A API é configurada em `src/environments/environment.ts`, inicialmente `http://localhost:8081`. Na integração, o token fica em memória e atualizar a página exige novo login.
+
+A versão anterior em JavaScript está preservada no histórico Git. A versão atual usa a estrutura gerada pelo Angular CLI.

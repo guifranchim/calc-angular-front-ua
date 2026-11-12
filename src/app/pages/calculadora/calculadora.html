@@ -1,0 +1,24 @@
+<section id="calculator-screen">
+  <div class="page-heading"><div><p class="eyebrow">ÁREA DE CÁLCULO</p><h1>Vamos aos números.</h1></div><button class="secondary" id="logout" (click)="sair()">Sair da conta ↗</button></div>
+  <div class="workspace">
+    <form id="calculator-form" class="calculator" [formGroup]="form" (ngSubmit)="calcular()">
+      <fieldset><legend>Escolha a operação</legend><div class="operations">
+        @for (operacao of operacoes; track operacao.valor) {
+          <label><input type="radio" formControlName="operacao" [value]="operacao.valor"><span><b>{{ operacao.simbolo }}</b>{{ operacao.nome }}</span></label>
+        }
+      </div></fieldset>
+      <div class="numbers">
+        <div><label for="first">Primeiro número</label><input id="first" type="number" formControlName="primeiro" step="1" min="-2147483648" max="2147483647" required></div>
+        <div><label for="second">Segundo número</label><input id="second" type="number" formControlName="segundo" step="1" min="-2147483648" max="2147483647" required></div>
+      </div>
+      <p class="hint">Use números inteiros.</p>
+      @if (erro()) { <p id="calculation-error" class="error" role="alert">{{ erro() }}</p> }
+      <button id="calculate-submit" class="primary" type="submit" [disabled]="carregando()">{{ carregando() ? 'Calculando…' : 'Calcular' }} <span aria-hidden="true">→</span></button>
+    </form>
+    <aside class="result-panel" aria-live="polite"><p class="eyebrow">RESULTADO</p><p id="expression">{{ resultado()?.expressao ?? 'Seu próximo cálculo começa aqui.' }}</p><output id="result">{{ resultado()?.resultado ?? '—' }}</output><p id="result-caption">{{ resultado() ? 'Cálculo concluído.' : 'Escolha a operação e informe os números.' }}</p></aside>
+  </div>
+  <section class="history"><div class="history-title"><h2>Últimos cálculos</h2><button class="text-button" (click)="historico.set([])">Limpar</button></div>
+    @if (!historico().length) { <p class="muted">Os resultados desta sessão aparecem aqui.</p> }
+    <ol>@for (calculo of historico(); track $index) { <li><span>{{ calculo.expressao }}</span><strong>{{ calculo.resultado }}</strong></li> }</ol>
+  </section>
+</section>

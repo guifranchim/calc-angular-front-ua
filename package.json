@@ -1,14 +1,30 @@
 {
-  "name": "aula-jwt-frontend",
-  "version": "1.0.0",
-  "private": true,
-  "type": "module",
+  "name": "aula-jwt-angular",
+  "version": "0.0.0",
   "scripts": {
-    "dev": "vite --host localhost --port 4200 --strictPort",
-    "build": "vite build",
-    "preview": "vite preview --host localhost --port 4200 --strictPort"
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "dev": "ng serve"
+  },
+  "private": true,
+  "packageManager": "npm@11.6.2",
+  "dependencies": {
+    "@angular/common": "^21.2.0",
+    "@angular/compiler": "^21.2.0",
+    "@angular/core": "^21.2.0",
+    "@angular/forms": "^21.2.0",
+    "@angular/platform-browser": "^21.2.0",
+    "@angular/router": "^21.2.0",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0"
   },
   "devDependencies": {
-    "vite": "7.3.8"
+    "@angular/build": "^21.2.30",
+    "@angular/cli": "^21.2.30",
+    "@angular/compiler-cli": "^21.2.0",
+    "prettier": "^3.8.1",
+    "typescript": "~5.9.2"
   }
 }

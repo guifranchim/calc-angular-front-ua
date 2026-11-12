@@ -1,0 +1,25 @@
+<section id="login-screen" class="login-layout">
+  <div class="intro">
+    <p class="eyebrow">SIMPLES, DO INÍCIO AO RESULTADO</p>
+    <h1>Entre.<br>Calcule.<br><span>Explore.</span></h1>
+    <p class="intro-copy">Quatro operações.<br>Um espaço para colocar suas ideias em prática.</p>
+    <div class="math-art" aria-hidden="true"><span>+</span><span>−</span><span>×</span><span>÷</span></div>
+  </div>
+  <div class="login-panel">
+    <p class="eyebrow">SUA CONTA</p><h2>Bom ter você aqui.</h2>
+    <p class="muted">Entre para acessar a calculadora.</p>
+    <form id="login-form" [formGroup]="form" (ngSubmit)="entrar()">
+      <label for="login">Usuário</label>
+      <input id="login" formControlName="login" autocomplete="username" required placeholder="Seu usuário">
+      <label for="password">Senha</label>
+      <div class="password-field">
+        <input id="password" formControlName="senha" [type]="mostrarSenha() ? 'text' : 'password'" autocomplete="current-password" required placeholder="Sua senha">
+        <button id="show-password" type="button" (click)="mostrarSenha.set(!mostrarSenha())" [attr.aria-label]="mostrarSenha() ? 'Ocultar senha' : 'Mostrar senha'">{{ mostrarSenha() ? 'Ocultar' : 'Mostrar' }}</button>
+      </div>
+      @if (form.invalid && form.touched) { <p class="error" role="alert">Preencha usuário e senha.</p> }
+      @if (erro()) { <p id="login-error" class="error" role="alert">{{ erro() }}</p> }
+      <button class="primary" id="login-submit" type="submit" [disabled]="carregando()">{{ carregando() ? 'Entrando…' : 'Entrar' }} <span aria-hidden="true">→</span></button>
+    </form>
+    @if (demo) { <div class="demo-note"><strong>Acesso de demonstração</strong><p>Usuário <code>admin</code> · Senha <code>AulaJwt123!</code></p></div> }
+  </div>
+</section>
