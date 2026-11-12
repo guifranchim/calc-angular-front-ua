@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Calcula — Laboratório JWT</title>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#">calcula<span>↗</span></a
+      ><span class="lab">Laboratório de aplicações web</span
+      ><span id="mode" class="mode">Demonstração local</span>
+    </header>
+    <main>
+      <section id="login-screen" class="login-layout">
+        <div class="intro">
+          <p class="eyebrow">SIMPLES, DO INÍCIO AO RESULTADO</p>
+          <h1>Entre.<br />Calcule.<br /><span>Explore.</span></h1>
+          <p class="intro-copy">
+            Quatro operações.<br />Um espaço para colocar suas ideias em
+            prática.
+          </p>
+          <div class="math-art" aria-hidden="true">
+            <span>+</span><span>−</span><span>×</span><span>÷</span>
+          </div>
+        </div>
+        <div class="login-panel">
+          <p class="eyebrow">SUA CONTA</p>
+          <h2>Bom ter você aqui.</h2>
+          <p class="muted">Entre para acessar a calculadora.</p>
+          <form id="login-form">
+            <label for="login">Usuário</label
+            ><input
+              id="login"
+              name="login"
+              autocomplete="username"
+              required
+              placeholder="Seu usuário"
+            /><label for="password">Senha</label>
+            <div class="password-field">
+              <input
+                id="password"
+                name="senha"
+                type="password"
+                autocomplete="current-password"
+                required
+                placeholder="Sua senha"
+              /><button
+                id="show-password"
+                type="button"
+                aria-label="Mostrar senha"
+              >
+                Mostrar
+              </button>
+            </div>
+            <p id="login-error" class="error" role="alert" hidden></p>
+            <button class="primary" id="login-submit" type="submit">
+              Entrar <span aria-hidden="true">→</span>
+            </button>
+          </form>
+          <div class="demo-note" id="demo-note">
+            <strong>Acesso de demonstração</strong>
+            <p>Usuário <code>admin</code> · Senha <code>AulaJwt123!</code></p>
+          </div>
+        </div>
+      </section>
+      <section id="calculator-screen" hidden>
+        <div class="page-heading">
+          <div>
+            <p class="eyebrow">ÁREA DE CÁLCULO</p>
+            <h1>Vamos aos números.</h1>
+          </div>
+          <button class="secondary" id="logout">Sair da conta ↗</button>
+        </div>
+        <div class="workspace">
+          <form id="calculator-form" class="calculator">
+            <fieldset>
+              <legend>Escolha a operação</legend>
+              <div class="operations">
+                <label
+                  ><input
+                    type="radio"
+                    name="operation"
+                    value="somar"
+                    checked
+                  /><span><b>+</b>Somar</span></label
+                ><label
+                  ><input type="radio" name="operation" value="subtrair" /><span
+                    ><b>−</b>Subtrair</span
+                  ></label
+                ><label
+                  ><input
+                    type="radio"
+                    name="operation"
+                    value="multiplicar"
+                  /><span><b>×</b>Multiplicar</span></label
+                ><label
+                  ><input type="radio" name="operation" value="dividir" /><span
+                    ><b>÷</b>Dividir</span
+                  ></label
+                >
+              </div>
+            </fieldset>
+            <div class="numbers">
+              <div>
+                <label for="first">Primeiro número</label
+                ><input
+                  id="first"
+                  type="number"
+                  step="1"
+                  min="-2147483648"
+                  max="2147483647"
+                  value="2"
+                  required
+                />
+              </div>
+              <div>
+                <label for="second">Segundo número</label
+                ><input
+                  id="second"
+                  type="number"
+                  step="1"
+                  min="-2147483648"
+                  max="2147483647"
+                  value="3"
+                  required
+                />
+              </div>
+            </div>
+            <p class="hint">Use números inteiros.</p>
+            <p id="calculation-error" class="error" role="alert" hidden></p>
+            <button id="calculate-submit" class="primary" type="submit">
+              Calcular <span aria-hidden="true">→</span>
+            </button>
+          </form>
+          <aside class="result-panel" aria-live="polite">
+            <p class="eyebrow">RESULTADO</p>
+            <p id="expression">Seu próximo cálculo começa aqui.</p>
+            <output id="result">—</output>
+            <p id="result-caption">Escolha a operação e informe os números.</p>
+          </aside>
+        </div>
+        <section class="history">
+          <div class="history-title">
+            <h2>Últimos cálculos</h2>
+            <button id="clear-history" class="text-button" type="button">
+              Limpar
+            </button>
+          </div>
+          <p id="history-empty" class="muted">
+            Os resultados desta sessão aparecem aqui.
+          </p>
+          <ol id="history-list"></ol>
+        </section>
+      </section>
+    </main>
+    <footer>
+      <span>calcula / laboratório</span><span>Aprender fazendo.</span>
+    </footer>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
